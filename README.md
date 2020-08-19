@@ -1,2 +1,2 @@
 # api-spring-boot
-Demo api with spring boot
+Restfull webservice with Spring Boot
