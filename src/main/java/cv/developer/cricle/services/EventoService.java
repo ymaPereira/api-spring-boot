@@ -1,16 +1,20 @@
 package cv.developer.cricle.services;
 
+import java.time.LocalDate;
 import java.util.List;
-
-import cv.developer.cricle.domain.Evento;
+import cv.developer.cricle.domain.Event;
 
 public interface EventoService {
 
-	Evento create(Evento evento);
+	Event create(Event evento);
 	
-	Evento update(Long id,Evento evento);
+	Event update(String id,Event evento);
 	
-	List<Evento> findAll();
+	List<Event> findAll();
 	
-	List<Evento> findByTema(String tema);
+	List<Event> findByTheme(String theme);
+	
+	List<Event> findByEventDate(LocalDate eventDate);
+	
+	void delete(String id);
 }

@@ -1,12 +1,13 @@
 package cv.developer.cricle.repositories;
 
+import java.time.LocalDate;
 import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
+import cv.developer.cricle.domain.Event;
 
-import cv.developer.cricle.domain.Evento;
+public interface EventoReporisoty extends JpaRepository<Event, String>{
 
-public interface EventoReporisoty extends JpaRepository<Evento, Long>{
-
-	List<Evento> findByTemaIgnoreCase(String tema);
+	List<Event> findByThemeIgnoreCase(String theme);
+	
+	List<Event> findByEventDate(LocalDate eventDate);
 }

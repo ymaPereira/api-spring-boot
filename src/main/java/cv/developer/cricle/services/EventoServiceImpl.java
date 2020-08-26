@@ -1,10 +1,10 @@
 package cv.developer.cricle.services;
 
+import java.time.LocalDate;
 import java.util.List;
-
+import java.util.UUID;
 import org.springframework.stereotype.Service;
-
-import cv.developer.cricle.domain.Evento;
+import cv.developer.cricle.domain.Event;
 import cv.developer.cricle.repositories.EventoReporisoty;
 
 @Service
@@ -20,18 +20,20 @@ public class EventoServiceImpl implements EventoService{
 	}
 
 	@Override
-	public Evento create(Evento evento) {
-		// TODO Auto-generated method stub
+	public Event create(Event evento) {
+		evento.setId(UUID.randomUUID().toString());
 		return eventoRepository.save(evento);
 	}
 
 	@Override
-	public Evento update(Long id, Evento evento) {
+	public Event update(String id, Event evento) {
 		return eventoRepository.findById(id).map(e->{
 			e.setAutor(evento.getAutor());
-			e.setDataEvento(evento.getDataEvento());
-			e.setOrganizador(evento.getOrganizador());
-			e.setTema(evento.getTema());
+			e.setEventDate(evento.getEventDate());
+			e.setOrganizers(e.getOrganizers());
+			e.setTheme(e.getTheme());
+			e.setDescription(evento.getDescription());
+			e.setGuests(evento.getGuests());
 			return eventoRepository.save(e);
 		}).orElseGet(()->{
 			evento.setId(id);
@@ -40,15 +42,23 @@ public class EventoServiceImpl implements EventoService{
 	}
 
 	@Override
-	public List<Evento> findAll() {
-		// TODO Auto-generated method stub
+	public List<Event> findAll() {
 		return eventoRepository.findAll();
 	}
 
 	@Override
-	public List<Evento> findByTema(String tema) {
-		// TODO Auto-generated method stub
-		return eventoRepository.findByTemaIgnoreCase(tema);
+	public List<Event> findByTheme(String theme) {
+		return eventoRepository.findByThemeIgnoreCase(theme);
+	}
+
+	@Override
+	public List<Event> findByEventDate(LocalDate eventDate) {
+		return eventoRepository.findByEventDate(eventDate);
+	}
+
+	@Override
+	public void delete(String id) {
+		eventoRepository.deleteById(id);
 	}
 
 }
